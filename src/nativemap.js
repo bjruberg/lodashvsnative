@@ -1,3 +1,7 @@
+/*
+ * Baseline native implementation of iterating over data for comparing its size and runtine with lodash versions
+ */
+
 import data from "./data.js";
 
 let secondChars;

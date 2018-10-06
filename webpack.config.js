@@ -1,20 +1,26 @@
+/*
+ * Standard webpack configuration using babel loader
+ */
+
 const CompressionPlugin = require("compression-webpack-plugin");
-var path = require("path");
-var webpack = require("webpack");
+const _ = require("lodash");
+const path = require("path");
+const webpack = require("webpack");
+
+const files = [
+    "lodashflatten",
+    "lodashflatten_map",
+    "lodashmap_func",
+    "lodashmap_string",
+    "nativemap",
+    "nativemap_with_lodash"
+];
 
 module.exports = {
     mode: "production",
-    entry: {
-        lodashmap: path.resolve(__dirname, "src/lodashmap.js"),
-        lodashmapflatten: path.resolve(__dirname, "src/lodashmapflatten.js"),
-        lodashmapiteratee: path.resolve(__dirname, "src/lodashmapiteratee.js"),
-        lodashflatten: path.resolve(__dirname, "src/lodashflatten.js"),
-        nativemap: path.resolve(__dirname, "src/nativemap.js"),
-        nativemapimportinglodash: path.resolve(
-            __dirname,
-            "src/nativemapimportinglodash.js"
-        )
-    },
+    entry: _.mapValues(_.keyBy(files), file =>
+        path.resolve(__dirname, `src/${file}.js`)
+    ),
     output: {
         filename: "[name].min.js",
         path: path.resolve(__dirname, "dist")
